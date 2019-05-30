@@ -2,7 +2,7 @@ package Events;
 
 import Commands.StartGame;
 import Main.MainClass;
-import OtherClasses.LastPlayerLoc;
+import Objects.LastPlayerLoc;
 import ninja.leaping.configurate.ConfigurationNode;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.type.HandTypes;
@@ -18,7 +18,6 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyles;
 import org.spongepowered.api.world.Location;
-import org.spongepowered.api.world.World;
 
 
 public class GameEvents {

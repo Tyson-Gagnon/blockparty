@@ -1,7 +1,7 @@
 package Commands;
 
 import Main.MainClass;
-import OtherClasses.Cuboid;
+import Objects.Cuboid;
 import ninja.leaping.configurate.ConfigurationNode;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.block.BlockTypes;

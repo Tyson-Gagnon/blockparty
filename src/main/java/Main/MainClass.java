@@ -3,7 +3,7 @@ package Main;
 import Commands.*;
 import Events.GameEvents;
 import Events.SettingEvents;
-import OtherClasses.LastPlayerLoc;
+import Objects.LastPlayerLoc;
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.collect.Maps;
 import jdk.internal.instrumentation.Logger;

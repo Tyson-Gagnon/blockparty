@@ -37,6 +37,7 @@ public class create implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 
+        //Gets the location of the two selected blocks. Theese blocks locations are gathered from the wand
         Vector3i pos1 =  SettingEvents.pos1;
         Vector3i pos2 =  SettingEvents.pos2;
 
@@ -46,31 +47,39 @@ public class create implements CommandExecutor {
         }
         Player player = (Player)src;
 
+        //Gets the arena name from the arguments
         String arenaName = args.<String>getOne("ArenaName").get();
         arenaName = arenaName.toUpperCase();
 
+        //checks if the player has both selections made
         if(pos1 != null && pos2 != null){
+            //gets config from main class
             ConfigurationNode node = MainClass.getInstance().getNode();
 
+            //makes sure that the arena doesent exist so that its not overwriting it. If it exist, it sends a player an error
             if(node.getNode("Arenas",arenaName).isVirtual()){
+                //sets one corner of arena
                 node.getNode("Arenas",arenaName,"x1").setValue(pos1.getX());
                 node.getNode("Arenas",arenaName,"y1").setValue(pos1.getY());
                 node.getNode("Arenas",arenaName,"z1").setValue(pos1.getZ());
 
+                //sets the other and puts them into the coonfig
                 node.getNode("Arenas",arenaName,"x2").setValue(pos2.getX());
                 node.getNode("Arenas",arenaName,"y2").setValue(pos2.getY());
                 node.getNode("Arenas",arenaName,"z2").setValue(pos2.getZ());
 
+                //gets the list of arenas that already exist
                 List<String> arenaList = node.getNode("Arenas", "ArenasList").getChildrenList().stream()
                         .map(ConfigurationNode::getString).collect(Collectors.toList());
 
+                //adds it to the list and passes it back to the config
                 arenaList.add(arenaName);
                 node.getNode("Arenas","ArenasList").setValue(arenaList);
 
                 player.sendMessage(Text.of(TextColors.LIGHT_PURPLE, "[Block Party] ", TextColors.AQUA,"Arena ", arenaName ," set"));
 
 
-
+                //saves config
                 try {
                     MainClass.getInstance().getConfigManager().save(node);
                 }catch (IOException e){

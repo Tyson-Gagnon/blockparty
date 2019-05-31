@@ -40,7 +40,7 @@ public class Generate implements CommandExecutor {
         return CommandResult.success();
     }
 
-
+    //loads schem. Dont feel like explaining
     private void loadSchem(String schemName){
 
         File inputFile = new File(MainClass.getSchematicsDir(),schemName + ".schematic");

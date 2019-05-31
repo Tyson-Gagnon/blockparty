@@ -29,6 +29,8 @@ public class List implements CommandExecutor {
         java.util.List<String> arenaList = node.getNode("Arenas", "ArenasList").getChildrenList().stream()
                 .map(ConfigurationNode::getString).collect(Collectors.toList());
 
+        //just sends the admin a list of avalible arenas
+
         player.sendMessage(Text.of(TextColors.LIGHT_PURPLE,"[Block Party] " , TextColors.AQUA, "List of arenas include:"));
         for (int i = 0; i < arenaList.size();i++){
             player.sendMessage(Text.of(TextColors.AQUA,arenaList.get(i)));

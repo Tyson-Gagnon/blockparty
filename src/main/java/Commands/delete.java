@@ -19,6 +19,8 @@ public class delete implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 
+        //SAME AS THE CREATE CLASS BUT JUST DELETES VALUES
+
         if(!(src instanceof Player)) {
             src.sendMessage(Text.of(TextColors.LIGHT_PURPLE, "[Block Party] ", TextColors.RED, "You need to be player to run this command dipshit"));
             return CommandResult.success();

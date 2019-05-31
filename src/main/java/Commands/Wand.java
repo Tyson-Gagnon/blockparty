@@ -22,18 +22,24 @@ public class Wand implements CommandExecutor {
             src.sendMessage(Text.of(TextColors.LIGHT_PURPLE, "[Block Party] ", TextColors.RED, "You need to be player to run this command dipshit"));
             return CommandResult.success();
         }
+
+
         Player player = (Player)src;
 
+                //creates a diamond hoe
                 ItemStack itemStack = ItemStack.builder()
                 .itemType(ItemTypes.DIAMOND_HOE).build();
 
+                //gives it a display name and makes it unbreakable
                 itemStack.offer(Keys.DISPLAY_NAME, Text.of(TextColors.LIGHT_PURPLE, "BlockParty Wand"));
                 itemStack.offer(Keys.UNBREAKABLE, true);
 
+        //LORE CAN ONLY BE SET BY A LIST. IDK WHY BUT K
         ArrayList<Text> arrayList = new ArrayList<>();
         arrayList.add(Text.of(TextColors.LIGHT_PURPLE,"Sets the arena of the blockparty. Left click = position 1. Right click = position 2."));
         itemStack.offer(Keys.ITEM_LORE,arrayList);
 
+        //gives the player the hoe
         player.getInventory().offer(itemStack);
         player.sendMessage(Text.of(TextColors.LIGHT_PURPLE, "[Block Party] ",TextColors.AQUA,"Here! Have a wand!"));
 

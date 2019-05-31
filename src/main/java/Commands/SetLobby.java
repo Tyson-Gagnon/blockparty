@@ -24,13 +24,18 @@ public class SetLobby implements CommandExecutor {
         }
          Player player = (Player)src;
 
+        //gets the aruments for the arena from the key 'arenaName'
         String arenaName = args.<String>getOne("arenaName").get();
         ConfigurationNode node = MainClass.getInstance().getNode();
 
+        //makes sure that arena exist!
         if(!node.getNode("Arenas",arenaName).isVirtual()){
 
+            //gets admins position
             Location location = player.getLocation();
             double posx,posy,posz;
+
+            //serializes it to the config so it can understand by setting and x,y,z values which we can retrieve later
 
             posx = location.getX();
             posy = location.getY();
@@ -42,6 +47,7 @@ public class SetLobby implements CommandExecutor {
 
             player.sendMessage(Text.of(TextColors.LIGHT_PURPLE,"[Block Party] ", TextColors.AQUA, "Set lobby coords to " , posx , " ", posy , " " , posz));
 
+            //saves config
             try {
                 MainClass.getInstance().getConfigManager().save(node);
             }catch (IOException e){

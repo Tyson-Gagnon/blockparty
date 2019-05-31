@@ -31,6 +31,8 @@ public class JoinGame implements CommandExecutor {
             String arenaName = MainClass.activeGameArena;
             ConfigurationNode node = MainClass.getInstance().getNode();
 
+
+            //gets the coords of both corners
             pos1x = node.getNode("Arenas",arenaName,"x1").getDouble();
             pos1z = node.getNode("Arenas",arenaName,"z1").getDouble();
             pos1y = node.getNode("Arenas",arenaName,"y1").getDouble();
@@ -39,10 +41,12 @@ public class JoinGame implements CommandExecutor {
             pos2z = node.getNode("Arenas",arenaName,"z2").getDouble();
             pos2y = node.getNode("Arenas",arenaName,"y2").getDouble();
 
+            //gets the middle of the arena by averaging the 2 corners
             double posx = (pos1x + pos2x) / 2;
             double posy = (pos1y + pos2y) / 2 + 10;
             double posz = (pos1z + pos2z) / 2;
 
+            //creates new location from the coords
             arena = new Location<>(player.getWorld(),posx,posy,posz);
 
         }else{
@@ -50,17 +54,21 @@ public class JoinGame implements CommandExecutor {
             return CommandResult.success();
         }
 
+        //checks if player isnt already in the game. It does this by checking if they are in the list of players in the game. if not, it adds them
         if(!(StartGame.gamePlayers.contains(player))){
             StartGame.gamePlayers.add(player);
 
+            //Only messages players that are participating in the game! so it doesent spam chat for everyone else
             for(Player joined : StartGame.gamePlayers){
                 joined.sendMessage(Text.of(TextStyles.BOLD,TextColors.AQUA,player.getName(),TextColors.RED," has joined"));
             }
+            //teleports them to arena
             player.setLocation(arena);
 
-            LastPlayerLoc playerLoc = new LastPlayerLoc(player,player.getLocation());
-            MainClass.playerLocs.add(playerLoc);
+            //LastPlayerLoc playerLoc = new LastPlayerLoc(player,player.getLocation()); Dont mind this. Was a stpud idea that doesent work
+            //MainClass.playerLocs.add(playerLoc); same with this
 
+            //makes sure that the players cant fly and shuts them down if they are
             player.offer(Keys.CAN_FLY, false);
             player.offer(Keys.IS_FLYING, false);
 

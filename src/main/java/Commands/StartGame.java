@@ -286,7 +286,6 @@ public class StartGame implements CommandExecutor {
 
     public void changeBlocks(DyeColor exception) {
 
-
         for (Location location : cuboid.getBlocks()){
 
             Optional<DyeColor> optional = location.getBlock().get(Keys.DYE_COLOR);
@@ -345,9 +344,9 @@ class CancellingTimerTask implements Consumer<Task> {
     private int seconds = 60;
     @Override
     public void accept(Task task) {
-        Text joinMessage = Text.builder("[Block Party] ").color(TextColors.LIGHT_PURPLE).onClick(TextActions.runCommand("/bp join"))
-                .append(Text.builder("A Block Party Event is starting in " + seconds +" seconds.Do /blockparty join or click this text to join!").color(TextColors.AQUA).build()).build();
         seconds--;
+        Text joinMessage = Text.builder("[Block Party] ").color(TextColors.LIGHT_PURPLE).onClick(TextActions.runCommand("/bp join"))
+                .append(Text.builder("A Block Party Event is starting in " + seconds +" seconds. Do /blockparty join or click this text to join!").color(TextColors.AQUA).build()).build();
         if(seconds == 30 || seconds == 10){
             MainClass.messageGamePlayers(joinMessage);
         }
@@ -358,7 +357,7 @@ class CancellingTimerTask implements Consumer<Task> {
         }
 
         if (seconds < 1) {
-
+            MainClass.canJoin = false;
             task.cancel();
         }
     }

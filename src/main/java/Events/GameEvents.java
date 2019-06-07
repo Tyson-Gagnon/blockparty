@@ -42,7 +42,7 @@ public class GameEvents {
                         }else{
 
                             Location location = new Location(player.getWorld(), node.getNode("Arena",MainClass.activeGameArena,"lobby","x").getDouble(),
-                                    node.getNode("Arena",MainClass.activeGameArena,"lobby","y").getDouble(),
+                                    node.getNode("Arena",MainClass.activeGameArena,"lobby","y").getDouble() + 2,
                                     node.getNode("Arena",MainClass.activeGameArena,"lobby","z").getDouble());
 
                             player.setLocation(location);
@@ -71,7 +71,7 @@ public class GameEvents {
                     }else{
 
                         Location location = new Location(player.getWorld(), node.getNode("Arena",MainClass.activeGameArena,"lobby","x").getDouble(),
-                                node.getNode("Arena",MainClass.activeGameArena,"lobby","y").getDouble(),
+                                node.getNode("Arena",MainClass.activeGameArena,"lobby","y").getDouble() + 2,
                                 node.getNode("Arena",MainClass.activeGameArena,"lobby","z").getDouble());
 
                         winner.setLocation(location);

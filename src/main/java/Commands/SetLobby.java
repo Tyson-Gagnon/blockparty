@@ -25,7 +25,7 @@ public class SetLobby implements CommandExecutor {
          Player player = (Player)src;
 
         //gets the aruments for the arena from the key 'arenaName'
-        String arenaName = args.<String>getOne("arenaName").get();
+        String arenaName = args.<String>getOne("arenaName").get().toUpperCase();
         ConfigurationNode node = MainClass.getInstance().getNode();
 
         //makes sure that arena exist!

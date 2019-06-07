@@ -187,7 +187,7 @@ public class StartGame implements CommandExecutor {
         DyeColor dyeColors;
         Random random = new Random();
         int rn = random.nextInt(11 - 1 + 1) + 1;
-        ItemStack itemStack = ItemStack.builder().itemType(ItemTypes.CONCRETE).build();
+        ItemStack itemStack = ItemStack.builder().itemType(ItemTypes.STAINED_HARDENED_CLAY).build();
 
         switch (rn){
             case 1:

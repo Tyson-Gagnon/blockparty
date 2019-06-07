@@ -34,11 +34,6 @@ public class GameEvents {
         if(StartGame.gamePlayers.contains(player) && StartGame.gamePlayers.size() > 1){
             if(source.getType() == DamageTypes.FIRE || source.getType() == DamageTypes.MAGMA){
 
-                for(int i = 0; i<MainClass.playerLocs.size();i++){
-                    LastPlayerLoc lastPlayerLoc = MainClass.playerLocs.get(i);
-                    if(player == lastPlayerLoc.getPlayer()){
-
-
                         //TODO: SET PLAYER TO LOBBY LOCATION
                         ConfigurationNode node = MainClass.getInstance().getNode();
 
@@ -54,15 +49,12 @@ public class GameEvents {
 
                         }
 
-
-                        MainClass.playerLocs.remove(lastPlayerLoc);
                         StartGame.gamePlayers.remove(player);
                         player.sendMessage(Text.of(TextStyles.BOLD, TextColors.AQUA,player.getName(),TextColors.RED," has lost. ", StartGame.gamePlayers.size(), " players remaining" ));
                         for(Player inGame : StartGame.gamePlayers){
                             inGame.sendMessage(Text.of(TextStyles.BOLD, TextColors.AQUA,player.getName(),TextColors.RED," has lost. ", StartGame.gamePlayers.size(), " players remaining" ));
                         }
-                    }
-                }
+
 
                 player.setItemInHand(HandTypes.OFF_HAND, null);
                 e.setCancelled(true);
@@ -72,8 +64,6 @@ public class GameEvents {
             if (StartGame.gamePlayers.size() == 1) {
                 Player winner = StartGame.gamePlayers.get(0);
                 Sponge.getServer().getBroadcastChannel().send(Text.of(TextColors.LIGHT_PURPLE, "[Block Party] ", TextColors.AQUA, winner.getName(), " has won the Block Party event!"));
-                LastPlayerLoc lastPlayerLoc = MainClass.playerLocs.get(0);
-                if (winner == lastPlayerLoc.getPlayer()) {
                     ConfigurationNode node = MainClass.getInstance().getNode();
 
                     if(node.getNode("Arenas", MainClass.activeGameArena,"lobby").isVirtual()){
@@ -89,12 +79,11 @@ public class GameEvents {
                     }
                     StartGame.gamePlayers.remove(player.getName());
                     MainClass.winner = true;
-                    MainClass.playerLocs.remove(lastPlayerLoc);
 
                     //TODO: Make sounds when someone is eliminated
                     //TODO: Make sound when someone wins
 
-                }
+
             }
         }
     }
@@ -105,33 +94,23 @@ public class GameEvents {
 
         if(StartGame.gamePlayers.contains(player) && StartGame.gamePlayers.size() > 1){
 
-            for(int i = 0; i<MainClass.playerLocs.size();i++){
-                LastPlayerLoc lastPlayerLoc = MainClass.playerLocs.get(i);
-                if(player == lastPlayerLoc.getPlayer()){
-                    player.setLocation(lastPlayerLoc.getLocation());
-                    MainClass.playerLocs.remove(lastPlayerLoc);
                     StartGame.gamePlayers.remove(player);
                     player.setItemInHand(HandTypes.OFF_HAND, null);
                     for(Player inGame : StartGame.gamePlayers){
                         inGame.sendMessage(Text.of(TextStyles.BOLD, TextColors.AQUA,player.getName(),TextColors.RED," has lost. ", StartGame.gamePlayers.size(), " players remaining" ));
                     }
-                }
-            }
 
         }
         if(MainClass.winner == false) {
             if (StartGame.gamePlayers.size() == 1) {
                 Player winner = StartGame.gamePlayers.get(0);
                 Sponge.getServer().getBroadcastChannel().send(Text.of(TextColors.LIGHT_PURPLE, "[Block Party] ", TextColors.AQUA, winner.getName(), " has won the Block Party event!"));
-                LastPlayerLoc lastPlayerLoc = MainClass.playerLocs.get(0);
-                if (winner == lastPlayerLoc.getPlayer()) {
-                    winner.setLocation(lastPlayerLoc.getLocation());
+
                     MainClass.winner = true;
                     StartGame.gamePlayers.remove(player.getName());
-                    MainClass.playerLocs.remove(lastPlayerLoc);
                     //TODO: Stop Event from continuing
 
-                }
+
             }
         }
     }

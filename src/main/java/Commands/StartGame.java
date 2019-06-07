@@ -267,7 +267,7 @@ public class StartGame implements CommandExecutor {
                 e.printStackTrace();
                 Sponge.getServer().getBroadcastChannel().send(Text.of(TextColors.RED,"ERROR LOADING SCHEM FILE"));
             }
-            Schematic schematic = DataTranslators.LEGACY_SCHEMATIC.translate(schematicData);
+            Schematic schematic = DataTranslators.SCHEMATIC.translate(schematicData);
 
             double posx = node.getNode("Arenas",arenaName,"x1").getDouble();
             double posz = node.getNode("Arenas",arenaName,"z1").getDouble();

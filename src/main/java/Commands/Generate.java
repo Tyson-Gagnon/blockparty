@@ -56,7 +56,7 @@ public class Generate implements CommandExecutor {
             }
 
             if(schematicData != null){
-                Schematic schematic = DataTranslators.LEGACY_SCHEMATIC.translate(schematicData);
+                Schematic schematic = DataTranslators.SCHEMATIC.translate(schematicData);
                 schematic.apply(player.getLocation(), BlockChangeFlags.NONE);
 
                 player.sendMessage(Text.of(TextColors.LIGHT_PURPLE,"[Block Party] ",TextColors.AQUA," Default platform generated. Please make sure to set the arena! Position 1 should be the block that you are standing on" +

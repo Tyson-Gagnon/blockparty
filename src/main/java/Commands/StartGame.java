@@ -133,7 +133,7 @@ public class StartGame implements CommandExecutor {
 
     private void reformBlocks(String arenaName){
         Random random = new Random();
-        int rn = random.nextInt(3 - 1 + 1) + 1;
+        int rn = random.nextInt(6 - 1 + 1) + 1;
         String schemName = "FLOOR" + Integer.toString(rn);
         Sponge.getServer().getBroadcastChannel().send(Text.of("Attempting to load schem"));
         loadSchem(schemName, MainClass.activeGameArena);
@@ -143,14 +143,7 @@ public class StartGame implements CommandExecutor {
         }
         round++;
 
-        if(round == 18){
-            MainClass.messageGamePlayers(Text.of(TextStyles.BOLD,TextColors.LIGHT_PURPLE,"[Block Party] ", TextColors.GRAY,"We are now at max speed!"));
-            for(Player players : gamePlayers){
-                players.playSound(SoundTypes.BLOCK_ANVIL_LAND,SoundCategories.MASTER,players.getPosition(),1);
-            }
-        }
-
-        if(delay > 2000){
+        if(delay > 1000){
             if(round % 3 == 0){
                 delay = delay - 500;
                 MainClass.messageGamePlayers(Text.of(TextStyles.BOLD,TextColors.LIGHT_PURPLE,"[Block Party] ", TextColors.GRAY,"Time to go faster!"));
@@ -159,6 +152,15 @@ public class StartGame implements CommandExecutor {
                 }
             }
         }
+
+        if(round == 24){
+            MainClass.messageGamePlayers(Text.of(TextStyles.BOLD,TextColors.LIGHT_PURPLE,"[Block Party] ", TextColors.GRAY,"We are now at max speed!"));
+            for(Player players : gamePlayers){
+                players.playSound(SoundTypes.BLOCK_ANVIL_LAND,SoundCategories.MASTER,players.getPosition(),1);
+            }
+        }
+
+
 
         if(MainClass.winner == true){
             endgGame();

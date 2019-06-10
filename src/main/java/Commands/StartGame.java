@@ -137,7 +137,6 @@ public class StartGame implements CommandExecutor {
         String schemName = "FLOOR" + Integer.toString(rn);
         Sponge.getServer().getBroadcastChannel().send(Text.of("Attempting to load schem"));
         loadSchem(schemName, MainClass.activeGameArena);
-        Sponge.getServer().getBroadcastChannel().send(Text.of("schem loaded"));
         for(Player player : gamePlayers){
             player.setItemInHand(HandTypes.OFF_HAND, null);
         }
@@ -187,7 +186,7 @@ public class StartGame implements CommandExecutor {
         DyeColor dyeColors;
         Random random = new Random();
         int rn = random.nextInt(11 - 1 + 1) + 1;
-        ItemStack itemStack = ItemStack.builder().itemType(ItemTypes.STAINED_HARDENED_CLAY).build();
+        ItemStack itemStack = ItemStack.builder().itemType(ItemTypes.CONCRETE).build();
 
         switch (rn){
             case 1:
@@ -358,6 +357,7 @@ class CancellingTimerTask implements Consumer<Task> {
 
         if (seconds < 1) {
             MainClass.canJoin = false;
+            MainClass.gameActive = true;
             task.cancel();
         }
     }

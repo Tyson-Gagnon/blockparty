@@ -6,10 +6,10 @@ import Events.SettingEvents;
 import Objects.LastPlayerLoc;
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.collect.Maps;
-import jdk.internal.instrumentation.Logger;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
+import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandResult;
@@ -44,7 +44,7 @@ import java.util.zip.GZIPOutputStream;
 import static org.spongepowered.api.command.args.GenericArguments.seq;
 import static org.spongepowered.api.command.args.GenericArguments.string;
 
-@Plugin(name = "blockParty",id = "blockparty",version = "1.0")
+@Plugin(name = "BlockParty",id = "blockparty",version = "1.0")
 public class MainClass {
 
     @Inject

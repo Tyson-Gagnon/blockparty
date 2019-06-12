@@ -121,9 +121,7 @@ public class StartGame implements CommandExecutor {
     }
 
     private void deleteBlocks(DyeColor dyeColor, String arenaName){
-        Sponge.getServer().getBroadcastChannel().send(Text.of("changing blocks started"));
         changeBlocks(dyeColor);
-        Sponge.getServer().getBroadcastChannel().send(Text.of("changing blocks finshed"));
         Task task5 = Task.builder().execute(() -> reformBlocks(arenaName))
                 .delay(5, TimeUnit.SECONDS)
                 .name("To-start1").submit(instance);
@@ -135,7 +133,6 @@ public class StartGame implements CommandExecutor {
         Random random = new Random();
         int rn = random.nextInt(6 - 1 + 1) + 1;
         String schemName = "FLOOR" + Integer.toString(rn);
-        Sponge.getServer().getBroadcastChannel().send(Text.of("Attempting to load schem"));
         loadSchem(schemName, MainClass.activeGameArena);
         for(Player player : gamePlayers){
             player.setItemInHand(HandTypes.OFF_HAND, null);

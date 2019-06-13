@@ -175,8 +175,8 @@ public class StartGame implements CommandExecutor {
         MainClass.canJoin = false;
         gamePlayers = new ArrayList<Player>();
         MainClass.winner = false;
-
-
+        delay = 5000;
+        round = 1;
     }
 
     public DyeColor chooseDissapearingBlocks(){

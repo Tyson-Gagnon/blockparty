@@ -11,6 +11,7 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.cause.entity.damage.DamageTypes;
 import org.spongepowered.api.event.cause.entity.damage.source.DamageSource;
 import org.spongepowered.api.event.entity.DamageEntityEvent;
+import org.spongepowered.api.event.entity.MoveEntityEvent;
 import org.spongepowered.api.event.filter.cause.Root;
 import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
 import org.spongepowered.api.event.item.inventory.DropItemEvent;
@@ -145,4 +146,37 @@ public class GameEvents {
         }
 
     }
+
+    @Listener
+    public void onPlayerTeleport(MoveEntityEvent.Teleport e) {
+        Entity entity = e.getTargetEntity();
+
+        if (entity instanceof Player) {
+            Player player = (Player) entity;
+            if (MainClass.gameActive == true) {
+                if (StartGame.gamePlayers.contains(player) && StartGame.gamePlayers.size() > 1) {
+
+                    StartGame.gamePlayers.remove(player);
+                    player.setItemInHand(HandTypes.OFF_HAND, null);
+                    for (Player inGame : StartGame.gamePlayers) {
+                        inGame.sendMessage(Text.of(TextStyles.BOLD, TextColors.AQUA, player.getName(), TextColors.RED, " has lost. ", StartGame.gamePlayers.size(), " players remaining"));
+                    }
+
+                }
+                if (MainClass.winner == false && MainClass.gameActive == true) {
+                    if (StartGame.gamePlayers.size() == 1) {
+                        Player winner = StartGame.gamePlayers.get(0);
+                        Sponge.getServer().getBroadcastChannel().send(Text.of(TextColors.LIGHT_PURPLE, "[Block Party] ", TextColors.AQUA, winner.getName(), " has won the Block Party event!"));
+
+                        MainClass.winner = true;
+                        StartGame.gamePlayers.remove(player.getName());
+                        //TODO: Stop Event from continuing
+
+
+                    }
+                }
+            }
+        }
+    }
+
 }

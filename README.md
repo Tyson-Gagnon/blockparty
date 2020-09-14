@@ -7,4 +7,4 @@ Minigame for players where floor dissapears except for certain colours and the p
 
 BUGGED IN NEWER VERSION
 
-REALLY BAD PRACTICES USED HERE
+God this needs to be remade
